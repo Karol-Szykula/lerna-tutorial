@@ -1,5 +1,8 @@
 
-// import validateEmail from '../utils/emailValidation'
+import validateEmail from '../utils/emailValidation'
+
+import auth from './../api';
+
 
 const LOG_IN = 'auth/LOG_IN'
 const LOG_OUT = 'auth/LOG_OUT'
@@ -30,6 +33,23 @@ const CONFIRMED_REGISTRATION_PASSWORD_CHANGE = 'auth/CONFIRMED_REGISTRATION_PASS
 //         alert(`Something went wrong`)
 //     }
 // }
+
+
+export const userRegistrationAsyncAction = () => (dispatch, getState) => {
+    const email = getState().auth.registrationEmail
+    const regPass = getState().auth.registrationPassword
+    const conRegPass = getState().auth.confirmedRegistrationPassword
+
+    if (validateEmail(email) && regPass !== '' && (regPass === conRegPass)) {
+        auth.create({ email, regPass })
+    } else if (!(validateEmail(email))) {
+        alert(`That is not a valid email adress`)
+    } else if (regPass !== conRegPass) {
+        alert(`Passwords doesn't match`)
+    } else {
+        alert(`Something went wrong`)
+    }
+}
 
 // export const logOutAsyncAction = () => (dispatch, getState) => {
 //     auth.signOut()
