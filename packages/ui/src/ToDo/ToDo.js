@@ -27,7 +27,6 @@ const style = {
     }
 }
 
-
 const ToDo = (props) => (
 
     <Paper

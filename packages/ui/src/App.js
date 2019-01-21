@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import ToDo from './ToDo/ToDo'
 
+import Auth from './Auth/Auth';
+import Todo from './ToDo/ToDo';
+
 class App extends Component {
+
   render() {
     return (
-      <ToDo />
+      <Auth >
+        <ToDo />
+      </Auth>
     );
   }
 }
