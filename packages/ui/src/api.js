@@ -6,6 +6,10 @@ const apiRest = rest('http://localhost:3030');
 
 api.configure(apiRest.fetch(fetch));
 
-export const auth = api.service('users')
+api.configure(feathers.authentication({
+    storage: window.localStorage
+}));
+
+export const server = 'http://localhost:3030/users'
 
 export default api;

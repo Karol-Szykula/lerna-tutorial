@@ -6,13 +6,13 @@ import { connect } from 'react-redux'
 import {
     // logInByGoogleAsyncAction,
     // logInAsyncAction,
-    // emailChangeAction,
-    // passwordChangeAction,
+    emailChangeAction,
+    passwordChangeAction,
     // resetPasswordAsyncAction,
-    // registrationEmailChangeAction,
-    // registrationPasswordChangeAction,
-    // confirmedRegistrationPasswordChange,
-    // signUpAsyncAction,
+    registrationEmailChangeAction,
+    registrationPasswordChangeAction,
+    confirmedRegistrationPasswordChange,
+    userRegistrationAsyncAction,
 } from '../state/auth'
 
 import RegistrationForm from './RegistrationForm';
@@ -44,32 +44,32 @@ const Auth = (props) => (
                 confirmedRegistrationPassword={props._confirmedRegistrationPassword}
                 confirmedRegistrationPasswordChangeHandler={props._confirmedRegistrationPasswordChange}
 
-                onSignUpClick={props._signUpAsyncAction}
+                onSignUpClick={props._userRegistrationAsyncAction}
             />
         </div>
 )
 
 const mapStateToProps = state => ({
-    // _isUserLoggedIn: state.auth.isUserLoggedIn,
-    // _email: state.auth.email,
-    // _password: state.auth.password,
-    // _registrationEmail: state.auth.registrationEmail,
-    // _registrationPassword: state.auth.registrationPassword,
-    // _confirmedRegistrationPassword: state.auth.confirmedRegistrationPassword,
+    _isUserLoggedIn: state.auth.isUserLoggedIn,
+    _email: state.auth.email,
+    _password: state.auth.password,
+    _registrationEmail: state.auth.registrationEmail,
+    _registrationPassword: state.auth.registrationPassword,
+    _confirmedRegistrationPassword: state.auth.confirmedRegistrationPassword,
 })
 
 const mapDispatchToProps = dispatch => ({
     // _logInByGoogleAsyncAction: () => dispatch(logInByGoogleAsyncAction()),
     // _logInAsyncAction: () => dispatch(logInAsyncAction()),
-    // _emailChangeAction: (event) => dispatch(emailChangeAction(event.target.value)),
+    _emailChangeAction: (event) => dispatch(emailChangeAction(event.target.value)),
 
-    // _passwordChangeAction: (event) => dispatch(passwordChangeAction(event.target.value)),
+    _passwordChangeAction: (event) => dispatch(passwordChangeAction(event.target.value)),
     // _passwordResetAsyncAction: () => dispatch(resetPasswordAsyncAction()),
-    // _registrationEmailChangeAction: (event) => dispatch(registrationEmailChangeAction(event.target.value)),
-    // _registrationPasswordChangeAction: (event) => dispatch(registrationPasswordChangeAction(event.target.value)),
-    // _confirmedRegistrationPasswordChange: (event) => dispatch(confirmedRegistrationPasswordChange(event.target.value)),
+    _registrationEmailChangeAction: (event) => dispatch(registrationEmailChangeAction(event.target.value)),
+    _registrationPasswordChangeAction: (event) => dispatch(registrationPasswordChangeAction(event.target.value)),
+    _confirmedRegistrationPasswordChange: (event) => dispatch(confirmedRegistrationPasswordChange(event.target.value)),
 
-    // _signUpAsyncAction: () => dispatch(signUpAsyncAction()),
+    _userRegistrationAsyncAction: () => dispatch(userRegistrationAsyncAction()),
 })
 
 export default connect(

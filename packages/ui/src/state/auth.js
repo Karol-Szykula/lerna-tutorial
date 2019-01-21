@@ -1,7 +1,8 @@
 
 import validateEmail from '../utils/emailValidation'
 
-import auth from './../api';
+import api from './../api';
+import { server } from './../api';
 
 
 const LOG_IN = 'auth/LOG_IN'
@@ -13,35 +14,24 @@ const REGISTRATION_EMAIL_CHANGE = 'auth/REGISTRATION_EMAIL_CHANGE'
 const REGISTRATION_PASSWORD_CHANGE = 'auth/REGISTRATION_PASSWORD_CHANGE'
 const CONFIRMED_REGISTRATION_PASSWORD_CHANGE = 'auth/CONFIRMED_REGISTRATION_PASSWORD_CHANGE'
 
-// export const signUpAsyncAction = () => (dispatch, getState) => {
-//     const email = getState().auth.registrationEmail
-//     const regPass = getState().auth.registrationPassword
-//     const conRegPass = getState().auth.confirmedRegistrationPassword
-
-//     if (validateEmail(email) && regPass !== '' && (regPass === conRegPass)) {
-//         auth.createUserWithEmailAndPassword(email, regPass)
-//             .then(res => {
-//                 dispatch(logInAction(res.user))
-//                 dispatch(saveLogInTimestampAsyncAction())
-//                 dispatch(loadTasksFromDbAsyncAction())
-//             })
-//     } else if (!(validateEmail(email))) {
-//         alert(`That is not a valid email adress`)
-//     } else if (regPass !== conRegPass) {
-//         alert(`Passwords doesn't match`)
-//     } else {
-//         alert(`Something went wrong`)
-//     }
-// }
-
-
 export const userRegistrationAsyncAction = () => (dispatch, getState) => {
     const email = getState().auth.registrationEmail
     const regPass = getState().auth.registrationPassword
     const conRegPass = getState().auth.confirmedRegistrationPassword
 
+    console.log(email)
+
     if (validateEmail(email) && regPass !== '' && (regPass === conRegPass)) {
-        auth.create({ email, regPass })
+        fetch(server, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: email,
+                password: regPass
+            })
+        })
     } else if (!(validateEmail(email))) {
         alert(`That is not a valid email adress`)
     } else if (regPass !== conRegPass) {
