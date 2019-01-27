@@ -4,7 +4,6 @@ import { BrowserRouter, Route } from 'react-router-dom'
 
 import Navigation from './Navigation'
 import MenuItem from './MenuItem';
-import ToDo from './../ToDo/ToDo'
 import OptionView from '../components/views/OptionsView/OptionsView';
 
 
