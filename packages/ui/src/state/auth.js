@@ -4,8 +4,9 @@ import validateEmail from '../utils/emailValidation'
 import { serverAdresss } from '../api';
 import api from './../api';
 
-const LOG_IN = 'auth/LOG_IN'
-const LOG_OUT = 'auth/LOG_OUT'
+const SET_USER_ID = 'auth/SET_USER_ID';
+const LOG_IN = 'auth/LOG_IN';
+const LOG_OUT = 'auth/LOG_OUT';
 const EMAIL_CHANGE = 'auth/EMAIL_CHANGE'
 const PASSWORD_CHANGE = 'auth/PASSWORD_CHANGE'
 
@@ -89,7 +90,15 @@ export const logInAsyncAction = () => (dispatch, getState) => {
         body: JSON.stringify(credentials)
     }).then(response => response.json())
         .then(data => {
-            dispatch(logInAction(data.accessToken))
+            dispatch(logInAction(data.accessToken));
+            // const promise = api.passport.verifyJWT(data.accessToken);
+            // (promise.then(res => console.log(res)));
+
+            dispatch(getUserIdAsyncAction())
+
+            // const user = api.service('users').get(data.accessToken.userId);
+
+
         })
         .catch(error => console.log(error))
 }
@@ -105,6 +114,19 @@ export const logInAsyncAction = () => (dispatch, getState) => {
 //         timestamp: Date.now()
 //     })
 // }
+
+const getUserIdAsyncAction = () => (dispatch, getState) => {
+
+    api.passport.verifyJWT(getState().auth.accessToken).then(res => {
+        dispatch(setUserIdAction(res.userId))
+    })
+
+}
+
+const setUserIdAction = userIdNewValue => ({
+    type: SET_USER_ID,
+    userIdNewValue
+})
 
 const logInAction = accessToken => ({
     type: LOG_IN,
@@ -141,7 +163,7 @@ const INITIAL_STATE = {
     isUserLoggedIn: false,
     email: 'example@example.com',
     password: 'example',
-    user: null,
+    userId: null,
 
     accessToken: null,
 
@@ -152,6 +174,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case SET_USER_ID:
+            return {
+                ...state,
+                userId: action.userIdNewValue
+            }
         case LOG_IN:
             return {
                 ...state,
