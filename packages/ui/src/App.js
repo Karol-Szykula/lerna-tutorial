@@ -3,13 +3,14 @@ import ToDo from './ToDo/ToDo'
 
 import Auth from './Auth/Auth';
 import Todo from './ToDo/ToDo';
+// import Router from './Navigation/Router'
 
 class App extends Component {
 
   render() {
     return (
       <Auth >
-        <ToDo />
+        <Todo />
       </Auth>
     );
   }
