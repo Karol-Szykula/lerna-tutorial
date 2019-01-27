@@ -18,7 +18,7 @@ import {
     // chooseFilterUncompletedAction
 } from '../state/tasks'
 
-// import { logOutAsyncAction } from '../state/auth'
+import { logOutAsyncAction } from '../state/auth'
 
 const style = {
     paper: {
@@ -82,7 +82,7 @@ const mapDispatchToProps = (dispatch) => ({
     // chooseFilterCompletedAction: () => dispatch(chooseFilterCompletedAction()),
     // chooseFilterUncompletedAction: () => dispatch(chooseFilterUncompletedAction()),
 
-    // logOut: () => dispatch(logOutAsyncAction())
+    logOut: () => dispatch(logOutAsyncAction())
 })
 
 export default connect(

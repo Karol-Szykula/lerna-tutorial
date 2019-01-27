@@ -4,6 +4,8 @@ import validateEmail from '../utils/emailValidation'
 import { serverAdresss } from '../api';
 import api from './../api';
 
+import { clearAllTasks } from './tasks'
+
 const SET_USER_ID = 'auth/SET_USER_ID';
 const LOG_IN = 'auth/LOG_IN';
 const LOG_OUT = 'auth/LOG_OUT';
@@ -45,14 +47,13 @@ export const userRegistrationAsyncAction = () => (dispatch, getState) => {
     }
 }
 
-// export const logOutAsyncAction = () => (dispatch, getState) => {
-//     auth.signOut()
-//         .then(
-//             res => {
-//                 dispatch(logOutAction())
-//                 dispatch(clearAllTasks())
-//             })
-// }
+export const logOutAsyncAction = () => (dispatch, getState) => {
+
+    api.logout();
+    dispatch(logOutAction())
+    dispatch(clearAllTasks())
+
+}
 
 // export const logInByGoogleAsyncAction = () => (dispatch, getState) => {
 //     auth.signInWithPopup(googleProvider)
@@ -182,7 +183,8 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isUserLoggedIn: false,
-                user: null
+                userId: null,
+                accessToken: null
             }
         case EMAIL_CHANGE:
             return {
