@@ -4,15 +4,17 @@ import LoginForm from './LoginForm'
 
 import { connect } from 'react-redux'
 import {
-    // logInByGoogleAsyncAction,
-    // logInAsyncAction,
     emailChangeAction,
     passwordChangeAction,
-    // resetPasswordAsyncAction,
     registrationEmailChangeAction,
     registrationPasswordChangeAction,
     confirmedRegistrationPasswordChange,
     userRegistrationAsyncAction,
+
+    logInAsyncAction,
+
+    // logInByGoogleAsyncAction,
+    // resetPasswordAsyncAction,
 } from '../state/auth'
 
 import RegistrationForm from './RegistrationForm';
@@ -29,6 +31,7 @@ const Auth = (props) => (
                 onEmailChangeHandler={props._emailChangeAction}
                 password={props._password}
                 onPasswordChangeHandler={props._passwordChangeAction}
+
                 onLogInClick={props._logInAsyncAction}
                 onLogInByGoogleClick={props._logInByGoogleAsyncAction}
                 onPasswordReset={props._passwordResetAsyncAction}
@@ -59,17 +62,20 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    // _logInByGoogleAsyncAction: () => dispatch(logInByGoogleAsyncAction()),
-    // _logInAsyncAction: () => dispatch(logInAsyncAction()),
     _emailChangeAction: (event) => dispatch(emailChangeAction(event.target.value)),
-
     _passwordChangeAction: (event) => dispatch(passwordChangeAction(event.target.value)),
-    // _passwordResetAsyncAction: () => dispatch(resetPasswordAsyncAction()),
     _registrationEmailChangeAction: (event) => dispatch(registrationEmailChangeAction(event.target.value)),
     _registrationPasswordChangeAction: (event) => dispatch(registrationPasswordChangeAction(event.target.value)),
+
     _confirmedRegistrationPasswordChange: (event) => dispatch(confirmedRegistrationPasswordChange(event.target.value)),
 
     _userRegistrationAsyncAction: () => dispatch(userRegistrationAsyncAction()),
+    _logInAsyncAction: () => dispatch(logInAsyncAction()),
+
+    // _logInByGoogleAsyncAction: () => dispatch(logInByGoogleAsyncAction()),
+
+    // _passwordResetAsyncAction: () => dispatch(resetPasswordAsyncAction()),
+
 })
 
 export default connect(
