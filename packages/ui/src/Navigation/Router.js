@@ -5,6 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Navigation from './Navigation'
 import MenuItem from './MenuItem';
 import ToDo from './../ToDo/ToDo'
+import OptionView from '../components/views/OptionsView/OptionsView';
 
 
 class Router extends React.Component {
@@ -28,13 +29,13 @@ class Router extends React.Component {
                         title="Test app">
                         <MenuItem
                             handleClose={this.handleClose}
-                            to="/"
-                            text="ToDo"
+                            to="/options-view"
+                            text="Options"
                         />
 
 
                     </Navigation>
-                    <Route path="/" exact component={ToDo} />
+                    <Route path="/options-view" exact component={OptionView} />
 
                 </div>
             </BrowserRouter>
