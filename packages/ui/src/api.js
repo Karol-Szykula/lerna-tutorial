@@ -23,5 +23,4 @@ const authOptions = {
 
 api.configure(auth(authOptions));
 
-
 export default api;

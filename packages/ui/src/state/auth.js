@@ -88,7 +88,9 @@ export const logInAsyncAction = () => (dispatch, getState) => {
         },
         body: JSON.stringify(credentials)
     }).then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => {
+            dispatch(logInAction(data.accessToken))
+        })
         .catch(error => console.log(error))
 }
 
@@ -104,9 +106,9 @@ export const logInAsyncAction = () => (dispatch, getState) => {
 //     })
 // }
 
-const logInAction = user => ({
+const logInAction = accessToken => ({
     type: LOG_IN,
-    user
+    accessToken
 })
 const logOutAction = () => ({ type: LOG_OUT })
 
@@ -140,6 +142,9 @@ const INITIAL_STATE = {
     email: 'example@example.com',
     password: 'example',
     user: null,
+
+    accessToken: null,
+
     registrationEmail: 'example@example.com',
     registrationPassword: 'example',
     confirmedRegistrationPassword: 'example',
@@ -151,7 +156,7 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isUserLoggedIn: true,
-                user: action.user
+                accessToken: action.accessToken
             }
         case LOG_OUT:
             return {
