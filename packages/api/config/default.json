@@ -29,6 +29,10 @@
       "entity": "user",
       "usernameField": "email",
       "passwordField": "password"
+    },
+    "cookie": {
+      "enabled": true,
+      "name": "feathers-jwt"
     }
   }
 }
