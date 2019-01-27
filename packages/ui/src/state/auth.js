@@ -1,10 +1,8 @@
 
 import validateEmail from '../utils/emailValidation'
+
 import { serverAdresss } from '../api';
-
-// import api from './../api';
-// import { serverAdresss } from './../api';
-
+import api from './../api';
 
 const LOG_IN = 'auth/LOG_IN'
 const LOG_OUT = 'auth/LOG_OUT'
@@ -73,25 +71,26 @@ export const userRegistrationAsyncAction = () => (dispatch, getState) => {
 //         })
 // }
 
-// export const logInAsyncAction = () => (dispatch, getState) => {
-//     const { auth: { email, password } } = getState()
+export const logInAsyncAction = () => (dispatch, getState) => {
+    const email = getState().auth.email
+    const password = getState().auth.password
 
-//     auth.signInWithEmailAndPassword(email, password)
-//         .then(res => {
-//             dispatch(logInAction(res.user))
-//             dispatch(saveLogInTimestampAsyncAction())
-//             dispatch(loadTasksFromDbAsyncAction())
-//         })
-//         .catch((error) => {
-//             var errorCode = error.code;
-//             var errorMessage = error.message;
-//             if (errorCode === 'auth/wrong-password') {
-//                 alert('Wrong password.');
-//             } else {
-//                 alert(errorMessage);
-//             }
-//         })
-// }
+    const credentials = {
+        strategy: 'local',
+        email: email,
+        password: password
+    }
+
+    fetch(`${serverAdresss}/authentication`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(credentials)
+    }).then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.log(error))
+}
 
 // export const resetPasswordAsyncAction = () => (dispatch, getState) => {
 //     auth.sendPasswordResetEmail(getState().auth.email)
@@ -138,12 +137,12 @@ export const confirmedRegistrationPasswordChange = newValue => ({
 
 const INITIAL_STATE = {
     isUserLoggedIn: false,
-    email: '',
-    password: '',
+    email: 'example@example.com',
+    password: 'example',
     user: null,
-    registrationEmail: '',
-    registrationPassword: '',
-    confirmedRegistrationPassword: ''
+    registrationEmail: 'example@example.com',
+    registrationPassword: 'example',
+    confirmedRegistrationPassword: 'example',
 }
 
 export default (state = INITIAL_STATE, action) => {
