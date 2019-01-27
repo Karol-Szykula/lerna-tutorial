@@ -10,6 +10,6 @@ api.configure(feathers.authentication({
     storage: window.localStorage
 }));
 
-export const server = 'http://localhost:3030/users'
+export const serverAdresss = 'http://localhost:3030'
 
 export default api;

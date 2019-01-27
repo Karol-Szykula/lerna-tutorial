@@ -1,8 +1,9 @@
 
 import validateEmail from '../utils/emailValidation'
+import { serverAdresss } from '../api';
 
-import api from './../api';
-import { server } from './../api';
+// import api from './../api';
+// import { serverAdresss } from './../api';
 
 
 const LOG_IN = 'auth/LOG_IN'
@@ -19,19 +20,23 @@ export const userRegistrationAsyncAction = () => (dispatch, getState) => {
     const regPass = getState().auth.registrationPassword
     const conRegPass = getState().auth.confirmedRegistrationPassword
 
-    console.log(email)
+
+    const payLoad = {
+        email,
+        password: regPass
+    }
 
     if (validateEmail(email) && regPass !== '' && (regPass === conRegPass)) {
-        fetch(server, {
+        console.log(`${JSON.stringify(payLoad)}/users`)
+        fetch(`${serverAdresss}/users`, {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                email: email,
-                password: regPass
-            })
-        })
+            body: JSON.stringify(payLoad)
+
+        }).then(response => console.log(response.json()))
+            .catch(error => console.log(error))
     } else if (!(validateEmail(email))) {
         alert(`That is not a valid email adress`)
     } else if (regPass !== conRegPass) {
