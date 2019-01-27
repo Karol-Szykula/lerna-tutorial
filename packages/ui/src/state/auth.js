@@ -91,14 +91,7 @@ export const logInAsyncAction = () => (dispatch, getState) => {
     }).then(response => response.json())
         .then(data => {
             dispatch(logInAction(data.accessToken));
-            // const promise = api.passport.verifyJWT(data.accessToken);
-            // (promise.then(res => console.log(res)));
-
             dispatch(getUserIdAsyncAction())
-
-            // const user = api.service('users').get(data.accessToken.userId);
-
-
         })
         .catch(error => console.log(error))
 }
