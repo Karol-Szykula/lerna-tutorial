@@ -18,8 +18,6 @@ import {
     // chooseFilterUncompletedAction
 } from '../state/tasks'
 
-import { logOutAsyncAction } from '../state/auth'
-
 const style = {
     paper: {
         margin: 20,
@@ -32,12 +30,7 @@ const ToDo = (props) => (
     <Paper
         style={style.paper}
     >
-        <RaisedButton
-            label={'Sign out'}
-            primary={true}
-            onClick={props.logOut}
-            fullWidth={true}
-        />
+
         <AddTask
             newTaskText={props.newTaskText}
             onNewTaskTextChangeHandler={props.taskTextChange}
@@ -82,7 +75,6 @@ const mapDispatchToProps = (dispatch) => ({
     // chooseFilterCompletedAction: () => dispatch(chooseFilterCompletedAction()),
     // chooseFilterUncompletedAction: () => dispatch(chooseFilterUncompletedAction()),
 
-    logOut: () => dispatch(logOutAsyncAction())
 })
 
 export default connect(
